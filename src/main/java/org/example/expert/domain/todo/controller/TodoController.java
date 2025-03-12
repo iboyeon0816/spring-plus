@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.example.expert.domain.common.annotation.Auth;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.todo.dto.request.TodoSaveRequest;
+import org.example.expert.domain.todo.dto.request.TodoSearchCondition;
 import org.example.expert.domain.todo.dto.response.TodoResponse;
 import org.example.expert.domain.todo.dto.response.TodoSaveResponse;
+import org.example.expert.domain.todo.dto.response.TodoSearchResponse;
 import org.example.expert.domain.todo.service.TodoService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +39,15 @@ public class TodoController {
             @RequestParam(required = false) LocalDate modifiedTo
     ) {
         return ResponseEntity.ok(todoService.getTodos(page, size, weather, modifiedFrom, modifiedTo));
+    }
+
+    @GetMapping("/todos/search")
+    public ResponseEntity<Page<TodoSearchResponse>> searchTodos(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @ModelAttribute TodoSearchCondition request
+    ) {
+        return ResponseEntity.ok(todoService.searchTodos(page, size, request));
     }
 
     @GetMapping("/todos/{todoId}")
