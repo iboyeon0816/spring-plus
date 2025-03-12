@@ -5,7 +5,7 @@ import org.example.expert.domain.common.exception.InvalidRequestException;
 import java.util.Arrays;
 
 public enum UserRole {
-    ADMIN, USER;
+    ROLE_ADMIN, ROLE_USER;
 
     public static UserRole of(String role) {
         return Arrays.stream(UserRole.values())
