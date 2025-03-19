@@ -2,6 +2,7 @@ package org.example.expert.domain.user.repository;
 
 import org.example.expert.config.PersistenceConfig;
 import org.example.expert.domain.user.entity.User;
+import org.example.expert.domain.user.enums.UserRole;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -35,7 +36,7 @@ class UserRepositoryTest {
 
         private final List<User> users = IntStream.rangeClosed(1, 1000000)
                 .mapToObj(i -> UUID.randomUUID().toString().substring(0, 13))
-                .map(uuid -> new User(uuid, null, uuid, null))
+                .map(uuid -> new User(uuid, null, uuid, UserRole.ROLE_USER))
                 .toList();
 
         @BeforeAll

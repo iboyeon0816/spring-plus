@@ -2,6 +2,11 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.3'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.jetbrains.kotlin.jvm' version '2.0.0'
+    id 'org.jetbrains.kotlin.plugin.lombok' version '2.0.0'
+    id 'org.jetbrains.kotlin.plugin.spring' version '2.0.0'
+    id 'org.jetbrains.kotlin.plugin.jpa' version '2.0.0'
+    id 'org.jetbrains.kotlin.kapt' version '2.0.0'
 }
 
 group = 'org.example'
@@ -11,6 +16,10 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
+}
+
+kapt {
+    keepJavacAnnotationProcessors = true
 }
 
 configurations {
@@ -43,15 +52,26 @@ dependencies {
 
     // QueryDSL
     implementation "com.querydsl:querydsl-jpa:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
-    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
-    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+    kapt "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+    kapt "jakarta.annotation:jakarta.annotation-api"
+    kapt "jakarta.persistence:jakarta.persistence-api"
 
     // aws s3
     implementation platform("io.awspring.cloud:spring-cloud-aws-dependencies:3.0.0")
     implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3'
+
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// kotlin
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.Embeddable")
+    annotation("jakarta.persistence.MappedSuperclass")
 }
