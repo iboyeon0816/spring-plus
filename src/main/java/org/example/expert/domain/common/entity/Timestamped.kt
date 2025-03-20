@@ -11,13 +11,11 @@ import java.time.LocalDateTime
 abstract class Timestamped {
     @CreatedDate
     @Column(updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    var createdAt: LocalDateTime? = null
+    var createdAt: LocalDateTime = LocalDateTime.now()
         protected set
 
     @LastModifiedDate
     @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    var modifiedAt: LocalDateTime? = null
+    var modifiedAt: LocalDateTime = LocalDateTime.now()
         protected set
 }
