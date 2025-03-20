@@ -1,12 +1,17 @@
 package org.example.expert.domain.todo.repository
 
+import org.example.expert.domain.common.exception.InvalidRequestException
 import org.example.expert.domain.todo.entity.Todo
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.data.repository.query.Param
 import java.time.LocalDate
+
+fun TodoRepository.findByIdOrElseThrow(todoId: Long) = this.findByIdOrNull(todoId)
+    ?: throw InvalidRequestException("Todo not found")
 
 interface TodoRepository : JpaRepository<Todo, Long>, TodoCustomRepository {
     // 날씨와 수정일 범위에 맞는 할 일을 수정일 내림차순으로 조회

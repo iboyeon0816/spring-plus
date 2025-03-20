@@ -10,12 +10,10 @@ import org.example.expert.domain.user.entity.User
 @Table(name = "todos")
 class Todo(
     title: String, contents: String, weather: String, user: User
-) :
-    Timestamped() {
+) : Timestamped() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
-        protected set
+    val id: Long = 0
 
     var title: String = title
         protected set
