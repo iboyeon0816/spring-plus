@@ -13,8 +13,7 @@ class Comment(
     Timestamped() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
-        protected set
+    val id: Long = 0
 
     var contents: String = contents
         protected set
