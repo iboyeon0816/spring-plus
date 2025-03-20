@@ -15,23 +15,19 @@ class Log(
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
-        protected set
+    val id: Long = 0
 
     @Column(nullable = false)
-    var requesterId: Long = requesterId
-        protected set
+    val requesterId: Long = requesterId
 
     @Column(nullable = false)
-    var assigneeId: Long = assigneeId
-        protected set
+    val assigneeId: Long = assigneeId
 
     @Column(nullable = false)
-    var todoId: Long = todoId
-        protected set
+    val todoId: Long = todoId
 
     @CreatedDate
     @Column(updatable = false)
-    var createdAt: LocalDateTime? = null
+    var createdAt: LocalDateTime = LocalDateTime.now()
         protected set
 }
