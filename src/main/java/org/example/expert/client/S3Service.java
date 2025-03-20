@@ -66,6 +66,6 @@ public class S3Service {
     }
 
     private String getKey(String fileName) {
-        return fileName + "-" + UUID.randomUUID();
+        return UUID.randomUUID() + "-" + fileName;
     }
 }
