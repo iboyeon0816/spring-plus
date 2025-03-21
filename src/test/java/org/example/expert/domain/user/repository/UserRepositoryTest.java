@@ -36,7 +36,7 @@ class UserRepositoryTest {
 
         private final List<User> users = IntStream.rangeClosed(1, 1000000)
                 .mapToObj(i -> UUID.randomUUID().toString().substring(0, 13))
-                .map(uuid -> new User(uuid, null, uuid, UserRole.ROLE_USER))
+                .map(uuid -> new User(uuid, "", uuid, UserRole.ROLE_USER))
                 .toList();
 
         @BeforeAll
